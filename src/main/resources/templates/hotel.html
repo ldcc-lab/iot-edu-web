@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=0.5"></meta>
+<link rel="stylesheet" type="text/css"
+	href="../MAN/resource/common/iu.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../MAN/resource/css/pages/index.css"></link>
+	<script src="/webjars/sockjs-client/1.0.2/sockjs.js"></script>
+<script src="/webjars/stomp-websocket/2.3.3/stomp.js"></script>
+<script src="/webjars/jquery/1.11.3/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../LEMP/LEMP.js"></script>
+<script type="text/javascript" src="/js/hotel.js"></script>
+
+<script type="text/javascript" src="../LEMP/LEMP-iotPlatform.js"></script>
+</head>
+
+<body style="width: 100%; overflow-x: hidden; overflow-y: hidden;">
+	<div class="iu-page index">
+		<header class="iu-header superheader">
+			<div class="iu-center-box supercenter-box">
+				<div class="iu-floating-image superfloating-image"></div>
+				<button id="IPsetBtn" type="button">IP Setting</button>
+				<button id="refreshBtn" type="button">Refresh</button>
+			</div>
+
+		</header>
+		<section class="iu-page-content superpage-content">
+			<section class="iu-section supersection">
+				<div class="iu-center-box supercenter-box-11">
+					<div class="iu-box superbox-19">
+						<div class="iu-box superbox-22">
+							<div class="iu-text supersupertext-29">
+									<span style="font-size: 18px;">TV Control</span>
+							</div>
+						</div>
+						<div class="iu-box superbox-20">
+							<div class="iu-text supertext-28">
+									<span style="font-size: 18px;">Light Control</span>
+							</div>
+						</div>
+						<div class="iu-box superbox-21">
+							<div class="iu-text supersupertext">
+									<span style="font-size: 18px;">Temperature Control</span>
+							</div>
+						</div>
+					</div>
+					<div class="iu-box superbox">
+						<div id="tvBtn" class="iu-box superbox-23">
+							<div id="tvBtn_Img"
+								class="iu-floating-image superfloating-image-36"></div>
+							<div class="iu-text supersupersupertext" id="tvBtn_Text">
+									<span style="color: #5f3c30;"><span
+										style="font-size: 22px;">TV 전원:OFF</span></span>
+							</div>
+						</div>
+						<div class="iu-box superbox-16">
+							<div id="ligntBnt_all_on"
+								class="iu-floating-image supersuperfloating-image-39"></div>
+							<div id="ligntBnt_all_off"
+								class="iu-floating-image supersuperfloating-image-39-off"></div>
+						</div>
+						<div id="tempBtn" class="iu-box superbox-17">
+							<div id="tempBtn_Img"
+								class="iu-floating-image superfloating-image-36"></div>
+							<div class="iu-text supersupertext-34" id="tempBtn_Text">
+									<span style="color: #5f3c30;"><span
+										style="font-size: 22px;">온도 전원:OFF</span></span>
+							</div>
+						</div>
+					</div>
+					<div class="iu-box superbox-14">
+						<div class="iu-box supersuperbox">
+							<div class="iu-text supersupertext-48">
+								<p id="setCH">
+									<span style="font-size: x-large;">채널 : <span
+										style="color: #ff6600;">10</span>&nbsp;
+									</span>
+								</p>
+								<p id="setVol">
+									<span style="font-size: x-large;">볼륨 : <span
+										style="color: #ff6600;">10</span></span>&nbsp;
+								</p>
+							</div>
+						</div>
+						<div id="lightBtn_1" class="iu-box supersuperbox-22">
+							<div id="lamp1_Img"
+								class="iu-floating-image superfloating-image-32"></div>
+							<div class="iu-text supersupertext-38" id="lamp1_Text">
+									<span style="color: #5f3c30;"><span
+										style="font-size: 22px;">조명 1 : <span>OFF</span></span></span>
+							</div>
+						</div>
+						<div class="iu-box supersuperbox-23">
+							<div class="iu-text supertext-44">
+								<p id="setTemp">
+									<span style="font-size: x-large;">설정 온도 : <span
+										style="color: #ff6600;">25</span>&nbsp;&deg;C
+									</span>
+								</p>
+									<span style="font-size: x-large;">현재 온도 : <span
+										style="color: #ff6600;">0</span>&nbsp;&deg;C
+									</span>
+							</div>
+						</div>
+					</div>
+					<div class="iu-box superbox-15">
+						<div id="lightBtn_2" class="iu-box supersuperbox-25">
+							<div id="lamp2_Img"
+								class="iu-floating-image superfloating-image-32"></div>
+							<div class="iu-text supersupertext-40" id="lamp2_Text">
+									<span style="color: #5f3c30;"><span
+										style="font-size: 22px;">조명 2 : <span>OFF</span></span></span>
+							</div>
+						</div>
+						<div id="lightBtn_3" class="iu-box superbox-31">
+							<div id="lamp3_Img"
+								class="iu-floating-image superfloating-image-32"></div>
+							<div class="iu-text supersupertext-42" id="lamp3_Text">
+									<span style="color: #5f3c30;"><span
+										style="font-size: 22px;">조명 3 : <span>OFF</span></span></span>
+							</div>
+						</div>
+						<div class="iu-box supersuperbox-26">
+							<div class="iu-text supertext-45">
+								<p id="setTemp_2">
+									<span style="font-size: 36px;"><span
+										style="color: #ff6600;">25</span>&nbsp;&deg;C</span>
+								</p>
+							</div>
+							<div id="tempDown"
+								class="iu-floating-image superfloating-image-46"></div>
+							<div id="tempUp" class="iu-floating-image superfloating-image-47"></div>
+							<div class="iu-text supertext-48">
+									<span style="font-size: 21px;">온도 설정</span>
+									<span style="font-size: 21px;">(입력/+/-)</span>
+							</div>
+						</div>
+						<div class="iu-box supersuperbox-24">
+							<div class="iu-text supersupertext-49">
+								<p id="setCH_2">
+									<span style="color: #ff6600;">10</span>
+								</p>
+									<span style="color: #ff6600;">CH</span>
+							</div>
+							<div id="CHDown"
+								class="iu-floating-image supersuperfloating-image-50"></div>
+							<div id="CHUp"
+								class="iu-floating-image supersuperfloating-image-51"></div>
+							<div class="iu-text supersupertext-52">
+									<span style="font-size: 21px;">채널/볼륨 설정</span>
+									<span style="font-size: 21px;">(입력/+/-)</span>
+							</div>
+							<div class="iu-text supersupersupersupertext">
+								<p id="setVol_2">
+									<span style="color: #ff6600;">10</span>
+								</p>
+									<span style="color: #ff6600;">VOL</span>
+							</div>
+							<div id="VolDown"
+								class="iu-floating-image supersupersuperfloating-image"></div>
+							<div id="VolUp"
+								class="iu-floating-image supersupersuperfloating-image-55"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+	</div>
+</body>
+</HTML>
